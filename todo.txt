@@ -1,0 +1,3 @@
+login page
+dashboard page
+dashboard page must show current subscriptions

@@ -1,0 +1,25 @@
+extends base
+
+block content 
+    section.dashboard.gray-bg.padd-0.mrg-top-50
+        .container-fluid
+            .row
+                .col-lg-2.col-md-2.col-sm-3.dashboard-bg
+                    // /. NAV TOP
+                    nav.navbar.navbar-side
+                        // Start Logo Header Navigation
+                        .navbar-header
+                            button.navbar-toggle(type='button' data-toggle='collapse' data-target='#dashboard-menu')
+                                i.fa.fa-bars
+                        include _dashboard_sidebar
+                    // /. NAV SIDE
+                .col-lg-10.col-md-10.col-sm-9.col-lg-push-2.col-md-push-2.col-sm-push-3
+                    .row.mrg-0.mrg-top-20
+                        .tr-single-box
+                            .tr-single-header
+                                if user.role === "user"
+                                    h3.dashboard-title= `${user.name}'s dashboard` 
+                                    include _dashview_user       
+                                else if user.role === "admin"
+                                    h3.dashboard-title= `admin dashboard` 
+                                    include _dashview_admin    

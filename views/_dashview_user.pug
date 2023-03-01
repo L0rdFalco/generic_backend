@@ -1,0 +1,27 @@
+.row.mrg-0.mrg-top-20
+    .tr-single-box
+        .tr-single-header
+            h3.dashboard-title what's new
+        .tr-single-body
+            // row
+            .row.mrg-bot-15
+            // row
+            .row
+                .inbox-message
+                    ul
+                        each item in data
+                            li
+                                a(href=`/get-dispute/${item.id}`)
+                                    .message-avatar
+                                        img(src='assets/img/user-1.jpg' alt='')
+                                    .message-body
+                                        .message-body-heading
+                                            h5= `${item.disputeType}`
+                                                if item.status === "resolved"
+                                                    span.read resolved
+                                                else if item.status === "pending"
+                                                    span.pending pending
+                                                else if item.status === "rejected"
+                                                    span.important rejected
+ 
+                                        p= `user ${item.user.name} requested ${item.disputeType} on ${item.createdAt}`

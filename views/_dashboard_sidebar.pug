@@ -1,0 +1,42 @@
+#dashboard-menu.collapse.sidebar-collapse
+    .profile-wrapper
+        .profile-wrapper-thumb
+            img.img-responsive.img-circle(src='/assets/img/user-1.jpg' alt='')
+            span.dashboard-user-status.bg-success
+        //- h4= `${user.role} : ${user.name.split(" ")[0]}`
+    ul#main-menu.nav
+        li
+            a(href='/dashboard')
+                i.fa.fa-dashboard(aria-hidden='true')
+                | Dashboard
+        if user.role === "user"        
+            li
+                a(href='/purchases')
+                    i.fa.fa-circle-o-notch(aria-hidden='true')
+                    | My Purchases
+        if user.role === "admin"        
+            li
+                a(href='/purchases')
+                    i.fa.fa-circle-o-notch(aria-hidden='true')
+                    | All Purchases                    
+        if user.role === "admin"
+            li
+                a(href='/disputes')
+                    i.fa.fa-circle-o-notch(aria-hidden='true')
+                    | All Disputes
+
+        //- if user.role === "user"
+        //-     li
+        //-         a(href='/disputes')
+        //-             i.fa.fa-circle-o-notch(aria-hidden='true')
+        //-             | Pending Disputes
+        if user.role === "user"
+            li
+                a(href='/subscriptions')
+                    i.fa.fa-circle-o-notch(aria-hidden='true')
+                    | Purchase subscription
+
+        li.log-off
+            a(href='/users/logout')
+                i.fa.fa-power-off(aria-hidden='true')
+                | Logout

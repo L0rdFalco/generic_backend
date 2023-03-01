@@ -1,0 +1,21 @@
+nav.navbar
+  .navbar-container.container
+    input(type='checkbox', name='', id='')
+    .hamburger-lines
+      span.line.line1
+      span.line.line2
+      span.line.line3
+    ul.menu-items
+      li
+        a(href='#') Home
+      if payload  
+        li
+          a(href='/dashboard') dashboard
+        li
+          a(href='/bookings') bookings
+        li
+          a(href='/users/logout') logout
+      else    
+        li
+          a(href='/auth') login
+    h1.logo Saffron Xavier

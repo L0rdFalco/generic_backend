@@ -1,0 +1,14 @@
+
+html
+  head
+    link(rel="stylesheet", href="/assets/css/home.css")
+    link(rel='stylsheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
+  body
+    include _navigation
+    #wrapper
+      #columns
+        each prod in prodData
+          .pin
+            p= prod.description.split(".")[0]
+              a(href=`/detail/${prod.id}`) 
+                img(src=`${prod.imageUrl}`)

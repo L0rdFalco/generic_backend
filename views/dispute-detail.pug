@@ -1,0 +1,63 @@
+extends base
+
+block content 
+    section.dashboard.gray-bg.padd-0.mrg-top-50
+        .container-fluid
+            .row
+                .col-lg-2.col-md-2.col-sm-3.dashboard-bg
+                    // /. NAV TOP
+                    nav.navbar.navbar-side
+                        // Start Logo Header Navigation
+                        .navbar-header
+                            button.navbar-toggle(type='button' data-toggle='collapse' data-target='#dashboard-menu')
+                                i.fa.fa-bars
+                        include _dashboard_sidebar
+                    // /. NAV SIDE
+                .col-lg-10.col-md-10.col-sm-9.col-lg-push-2.col-md-push-2.col-sm-push-3
+                    .row.mrg-0.mrg-top-20
+                        .tr-single-box
+                            .tr-single-header
+                                .container
+                                    if user.role === "admin"
+                                        .card-big
+                                            .card-header
+                                                img(src='https://c0.wallpaperflare.com/preview/483/210/436/car-green-4x4-jeep.jpg', alt='rover')
+                                            .card-body
+                                                span.tag.tag-teal= `${data.status}`
+                                                br
+                                                .user
+                                                    img(src='/assets/img/user-1.jpg', alt='user')
+                                                    .user-info
+                                                        h5=user.name
+                                                        small= String(data.createdAt).split("G")[0]
+                                                br
+                                                h4= `user name: ${data.user.name}`
+                                                br
+                                                h4= `product: ${data.subscription.product.name}`
+                                                br
+                                                h4= `description: ${data.subscription.product.description}`
+                                                br
+                                                h4= `price: $${data.subscription.price}`
+                                                br
+                                                a#processActionBtn
+                                                    if data.disputeType === "requestRefund"
+                                                        a(href="/sefsfsf") 
+                                                            span.tag.tag-purple= "process refund"
+                                                    if data.disputeType === "cancelSubscription"
+                                                        a(href="/sefsfsf") 
+                                                            span.tag.tag-purple= "process subcription cancellation"
+                                                    if data.disputeType === "upgradeSubscription"
+                                                        a(href="/sefsfsf") 
+                                                            span.tag.tag-purple= "process subscription upgrade"
+                                                    if data.disputeType === "downgradeSubscription"
+                                                        a(href="/sefsfsf") 
+                                                            span.tag.tag-purple= "process subscription downgrade"
+                                                    if data.disputeType === "changeBillingCycle"
+                                                        a(href="/sefsfsf") 
+                                                            span.tag.tag-purple= "process billing cycle change"
+
+                                                br
+
+
+    if user.role === "admin"
+        script(src="/assets/js/transactionActions.js") 

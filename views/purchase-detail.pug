@@ -1,0 +1,109 @@
+extends base
+
+block content 
+    section.dashboard.gray-bg.padd-0.mrg-top-50
+        .container-fluid
+            .row
+                .col-lg-2.col-md-2.col-sm-3.dashboard-bg
+                    // /. NAV TOP
+                    nav.navbar.navbar-side
+                        // Start Logo Header Navigation
+                        .navbar-header
+                            button.navbar-toggle(type='button' data-toggle='collapse' data-target='#dashboard-menu')
+                                i.fa.fa-bars
+                        include _dashboard_sidebar
+                    // /. NAV SIDE
+                .col-lg-10.col-md-10.col-sm-9.col-lg-push-2.col-md-push-2.col-sm-push-3
+                    .row.mrg-0.mrg-top-20
+                        .tr-single-box
+                            .tr-single-header
+
+                                h3.dashboard-title= `${data.product.name} purchase details` 
+                                    .container
+                                        if user.role === "admin"
+                                            .card-big
+                                                .card-header
+                                                    img(src='https://c0.wallpaperflare.com/preview/483/210/436/car-green-4x4-jeep.jpg', alt='rover')
+                                                .card-body
+                                                    span.tag.tag-teal= `payment cycle: ${data.paymentCycle}`
+                                                    br
+                                                    h4= `subscription id: ${data.id}`
+                                                    br
+                                                    h4= `user id: ${data.user.id}`
+                                                    br
+                                                    h4= `product id: ${data.product.id}`
+                                                    br
+                                                    h4= `name: ${data.product.name}`
+                                                    br
+                                                    h4=`product desciption : ${data.product.description}`.split(".")
+                                                    br
+                                                    p= `price: $${data.price}`
+       
+                                                    br
+                                                    .user
+                                                        img(src='https://yt3.ggpht.com/a/AGF-l7-0J1G0Ue0mcZMw-99kMeVuBmRxiPjyvIYONg=s900-c-k-c0xffffffff-no-rj-mo', alt='user')
+                                                        .user-info
+                                                            h5= data.user.name
+                                                            small= String(data.createdAt).split("G")[0]                                        
+
+                                        if data.paymentCycle === "recurring" && user.role === "user"
+                                            .card-big
+                                                .card-header
+                                                    img(src='https://c0.wallpaperflare.com/preview/483/210/436/car-green-4x4-jeep.jpg', alt='rover')
+                                                .card-body
+                                                    span.tag.tag-teal= `payment cycle: ${data.paymentCycle}`
+                                                    br
+                                                    h4#subscriptionId= `subscription id: ${data.id}`
+                                                    br
+                                                    h4= `user id: ${data.user.id}`
+                                                    br
+                                                    h4= `product id: ${data.product.id}`
+                                                    br
+                                                    h4= `name: ${data.product.name}`
+                                                    br
+                                                    h4=`product desciption : ${data.product.description}`.split(".")
+                                                    br
+                                                    p= `price: $${data.price}`
+                                                    a#upgradeBtn
+                                                        span.tag.tag-purple= "upgrade subscription"        
+                                                    a#downgradeBtn
+                                                        span.tag.tag-purple= "downgrade subscription"        
+                                                    a#cancelBtn
+                                                        span.tag.tag-purple= "cancel subscription"        
+                                                    a#changeBillingBtn
+                                                        span.tag.tag-purple= "change billing cycle"        
+                                                    br
+                                                    .user
+                                                        img(src='https://yt3.ggpht.com/a/AGF-l7-0J1G0Ue0mcZMw-99kMeVuBmRxiPjyvIYONg=s900-c-k-c0xffffffff-no-rj-mo', alt='user')
+                                                        .user-info
+                                                            h5= data.user.name
+                                                            small= String(data.createdAt).split("G")[0]
+
+                                        else if data.paymentCycle === "onetime" && user.role === "user"
+                                            .card-big
+                                                .card-header
+                                                    img(src='https://c0.wallpaperflare.com/preview/483/210/436/car-green-4x4-jeep.jpg', alt='rover')
+                                                .card-body
+                                                    span.tag.tag-teal= `payment cycle: ${data.paymentCycle}`
+                                                    br
+                                                    h4#subscriptionId= `subscription id: ${data.id}`
+                                                    br
+                                                    h4= `user id: ${data.user.id}`
+                                                    br
+                                                    h4= `product id: ${data.product.id}`
+                                                    br
+                                                    h4= `name: ${data.product.name}`
+                                                    br
+                                                    h4=`product desciption : ${data.product.description}`.split(".")
+                                                    br
+                                                    p= `price: $${data.price}`
+                                                    a#refundBtn
+                                                        span.tag.tag-purple= "request refund"           
+                                                    br
+                                                    .user
+                                                        img(src='https://yt3.ggpht.com/a/AGF-l7-0J1G0Ue0mcZMw-99kMeVuBmRxiPjyvIYONg=s900-c-k-c0xffffffff-no-rj-mo', alt='user')
+                                                        .user-info
+                                                            h5= data.user.name
+                                                            small= String(data.createdAt).split("G")[0]
+
+    script(src="/assets/js/disputes.js") 
