@@ -7,7 +7,7 @@ const subscriptionsSchema = mongoose.Schema({
     },
     user: {
         type: mongoose.Schema.ObjectId,
-        ref: "SocialUser",
+        ref: "User",
         required: [true, "subscription must have a user id"]
     },
     price: {

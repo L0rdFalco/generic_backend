@@ -1,4 +1,3 @@
-const SocialUsersModel = require("../models/SocialUsersModel.js")
 const SubscriptionsModel = require("../models/SubscriptionsModel.js")
 const DisputesModel = require("../models/disputesModel.js")
 const ProductsModel = require("../models/ProductsModel.js")
@@ -37,6 +36,8 @@ exports.getAuthPage = (request, response, next) => {
 
 exports.getDashboardPage = async (request, response, next) => {
     try {
+
+
         let disputeDocs = null;
 
         if (request.user.role === "admin")
@@ -48,7 +49,8 @@ exports.getDashboardPage = async (request, response, next) => {
 
         response.status(200).render("dashboard", {
             user: request.user,
-            data: disputeDocs
+            data: disputeDocs,
+            token: request.authToken
         })
 
     } catch (error) {
@@ -67,7 +69,9 @@ exports.getSubscriptionsPage = async (request, response, next) => {
 
         response.status(200).render("subscriptions", {
             user: request.user,
-            prods: prodDocs
+            prods: prodDocs,
+            token: request.authToken
+
         })
 
     } catch (error) {
@@ -87,7 +91,9 @@ exports.getOrderPage = async (request, response, next) => {
 
         response.status(200).render("orderpage",
             {
-                data: itemData[0]
+                data: itemData[0],
+                token: request.authToken
+
             })
 
     } catch (error) {
@@ -115,7 +121,9 @@ exports.getPurchasesPage = async (request, response, next) => {
 
         response.status(200).render("purchases", {
             user: request.user,
-            data: subscriptionDocs
+            data: subscriptionDocs,
+            token: request.authToken
+
         })
 
     } catch (error) {
@@ -136,7 +144,9 @@ exports.getSinglePurchasePage = async (request, response, next) => {
 
         response.status(200).render("purchase-detail", {
             user: request.user,
-            data: subscriptionDoc
+            data: subscriptionDoc,
+            token: request.authToken
+
         })
 
     } catch (error) {
@@ -158,7 +168,9 @@ exports.getSingleDisputePage = async (request, response, next) => {
 
         response.status(200).render("dispute-detail", {
             user: request.user,
-            data: disputeDoc
+            data: disputeDoc,
+            token: request.authToken
+
         })
 
     } catch (error) {

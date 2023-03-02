@@ -1,9 +1,57 @@
 const jwt = require("jsonwebtoken")
 const UsersModel = require("../models/UsersModel.js")
 
-exports.protect = (request, response, next) => {
+exports.protect = async (request, response, next) => {
 
-    next()
+    try {
+        /**
+ * 1 check if JWT has been sent in params or body
+ * 2. verify said token
+ * 3. check if encoded user in in the db
+ * 4. checkc if user changed passwordsa after token was issued
+ * 5. asign queried user to request.user and response.locals.user
+ * 6. call next()
+ * 
+ */
+
+        let authToken = null
+
+        if (request.params.authtoken) {
+            authToken = request.params.authtoken
+        }
+        else if (request.body.authtoken) {
+            authToken = request.body.authtoken
+        }
+
+        if (!authToken) return response.status(400).json({ message: "not logged in" })
+
+        const verifyPromise = new Promise(function (resolve, reject) {
+            return jwt.verify(authToken, process.env.JWT_SECRET, (err, decoded) => {
+                if (err) reject(err)
+                else if (decoded) resolve(decoded)
+            })
+
+        })
+
+        let decoded = await verifyPromise
+
+        const queriedUser = await UsersModel.findById(decoded.id)
+
+        if (!queriedUser) return response.status(400).json({ message: "user doesn't exist in the DB" })
+
+        if (queriedUser.passwordChangedAfter(decoded.iat)) return response.status(401).json({ message: "sorry! password mismatch!" })
+
+        request.user = queriedUser
+        request.authToken = authToken
+
+        next()
+    } catch (error) {
+        console.log(error);
+
+        response.status(400).json({ message: "protect fail" })
+
+    }
+
 
 }
 

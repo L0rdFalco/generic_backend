@@ -83,7 +83,11 @@ UsersSchema.methods.doPasswordsMatch = async function (inputtedPW, savedPW) {
 
 
 UsersSchema.methods.passwordChangedAfter = function (tokenIssueDate) {
+    //return true if token was issued after password was changed
+    if (this.passwordChangedAt) return parseInt(this.passwordChangedAt.getTime() / 1000, 10) > tokenIssueDate
 
+    //returning false means that the password was never changed because the field doesn't exist
+    return false;
 }
 
 const UsersModel = mongoose.model("User", UsersSchema)

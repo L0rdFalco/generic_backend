@@ -23,7 +23,7 @@ block content
                                   h3.dashboard-title= `${user.name}'s purchases`                                   
                                 .container
                                   each purchase in data
-                                    a(href=`/purchases/${purchase.id}`) 
+                                    a(href=`/purchases/${purchase.id}/${token}`) 
                                       .card
                                         .card-header
                                           img(src='https://c0.wallpaperflare.com/preview/483/210/436/car-green-4x4-jeep.jpg', alt='rover')

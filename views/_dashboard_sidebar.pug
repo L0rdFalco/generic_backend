@@ -6,22 +6,22 @@
         //- h4= `${user.role} : ${user.name.split(" ")[0]}`
     ul#main-menu.nav
         li
-            a(href='/dashboard')
+            a(href=`/dashboard/${token}`)
                 i.fa.fa-dashboard(aria-hidden='true')
                 | Dashboard
         if user.role === "user"        
             li
-                a(href='/purchases')
+                a(href=`/purchases/${token}`)
                     i.fa.fa-circle-o-notch(aria-hidden='true')
                     | My Purchases
         if user.role === "admin"        
             li
-                a(href='/purchases')
+                a(href=`/purchases/${token}`)
                     i.fa.fa-circle-o-notch(aria-hidden='true')
                     | All Purchases                    
         if user.role === "admin"
             li
-                a(href='/disputes')
+                a(href=`/disputes/${token}`)
                     i.fa.fa-circle-o-notch(aria-hidden='true')
                     | All Disputes
 
@@ -32,11 +32,11 @@
         //-             | Pending Disputes
         if user.role === "user"
             li
-                a(href='/subscriptions')
+                a(href=`/subscriptions/${token}`)
                     i.fa.fa-circle-o-notch(aria-hidden='true')
                     | Purchase subscription
 
         li.log-off
-            a(href='/users/logout')
+            a(href=`/users/logout/${token}`)
                 i.fa.fa-power-off(aria-hidden='true')
                 | Logout

@@ -6,6 +6,7 @@ exports.createOrder = async (request, response, next) => {
 
     let cOrderRes = null;
     try {
+
         const productData = await ProductsModel.find({ name: request.body.productName })
 
         const url = `${process.env.base}/v2/checkout/orders`

@@ -4,7 +4,7 @@ const authController = require("../controllers/authController.js")
 
 const purchasesRouter = express.Router();
 
-purchasesRouter.route("/").post(authController.restrictTo("user"), purchasesController.createOrder)
-purchasesRouter.route("/:orderID/capture").post(authController.restrictTo("user"), purchasesController.capturePayment)
+purchasesRouter.route("/:authtoken").post(authController.protect, authController.restrictTo("user"), purchasesController.createOrder)
+purchasesRouter.route("/:orderID/capture/:authtoken").post(authController.protect, authController.restrictTo("user"), purchasesController.capturePayment)
 
 module.exports = purchasesRouter;

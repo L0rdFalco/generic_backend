@@ -54,6 +54,13 @@ signUpBtn.addEventListener("click", async function (e) {
 
     console.log(res.data);
 
+    if (res.data.message.includes("success")) {
+        localStorage.setItem("jwt_token", res.data.token)
+    }
+    else {
+        console.log("something went wrong in the sign up");
+    }
+
 
 })
 
@@ -74,7 +81,7 @@ signInBtn.addEventListener("click", async function (e) {
         return
     }
 
-    const res = await fetch("/users/login", {
+    const res1 = await fetch("/users/login", {
         method: "POST",
         body: JSON.stringify({
             email: emailVal1,
@@ -86,7 +93,14 @@ signInBtn.addEventListener("click", async function (e) {
 
     })
 
-    console.log(await res.json());
+    const res2 = await res1.json();
+    console.log(res2);
 
+    if (res2.message.includes("success")) {
+        localStorage.setItem("jwt_token", res2.token)
+    }
+    else {
+        console.log("something went wrong in the login");
+    }
 
 })

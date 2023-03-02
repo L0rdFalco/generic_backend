@@ -8,11 +8,15 @@ paypal.Buttons({
 
         try {
 
-            const res1 = await fetch("http://127.0.0.1:3000/purchases", {
+            const token = localStorage.getItem("jwt_token")
+
+            console.log("---> ", url.split("/")[4]);
+
+            const res1 = await fetch(`http://127.0.0.1:3000/purchases/${token}`, {
                 method: "POST",
                 headers: { 'Content-type': 'application/json' },
                 body: JSON.stringify({
-                    productName: url.split("/").slice(-1)[0]
+                    productName: url.split("/")[4]
                 })
             })
 
@@ -29,14 +33,15 @@ paypal.Buttons({
 
     onApprove: async (data, actions) => {
         try {
+            const token = localStorage.getItem("jwt_token")
 
 
-            const res1 = await fetch(`http://127.0.0.1:3000/purchases/${data.orderID}/capture`,
+            const res1 = await fetch(`http://127.0.0.1:3000/purchases/${data.orderID}/capture/${token}`,
                 {
                     method: "POST",
                     headers: { 'Content-type': 'application/json' },
                     body: JSON.stringify({
-                        productName: url.split("/").slice(-1)[0]
+                        productName: url.split("/")[4]
                     })
                 })
 
@@ -47,7 +52,7 @@ paypal.Buttons({
                 element.innerHTML = '<h3>Thank you for your payment!</h3>';
 
                 setTimeout(() => {
-                    window.location.href = 'http://127.0.0.1:3000/dashboard';
+                    window.location.href = `http://127.0.0.1:3000/dashboard/${token}`;
 
                 }, 5000)
             }
