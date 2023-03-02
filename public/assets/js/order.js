@@ -10,9 +10,7 @@ paypal.Buttons({
 
             const token = localStorage.getItem("jwt_token")
 
-            console.log("---> ", url.split("/")[4]);
-
-            const res1 = await fetch(`http://127.0.0.1:3000/purchases/${token}`, {
+            const res1 = await fetch(`/purchases/${token}`, {
                 method: "POST",
                 headers: { 'Content-type': 'application/json' },
                 body: JSON.stringify({
@@ -36,7 +34,7 @@ paypal.Buttons({
             const token = localStorage.getItem("jwt_token")
 
 
-            const res1 = await fetch(`http://127.0.0.1:3000/purchases/${data.orderID}/capture/${token}`,
+            const res1 = await fetch(`/purchases/${data.orderID}/capture/${token}`,
                 {
                     method: "POST",
                     headers: { 'Content-type': 'application/json' },
@@ -52,7 +50,7 @@ paypal.Buttons({
                 element.innerHTML = '<h3>Thank you for your payment!</h3>';
 
                 setTimeout(() => {
-                    window.location.href = `http://127.0.0.1:3000/dashboard/${token}`;
+                    window.location.href = `/dashboard/${token}`;
 
                 }, 5000)
             }

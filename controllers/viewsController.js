@@ -164,8 +164,6 @@ exports.getSingleDisputePage = async (request, response, next) => {
 
         const disputeDoc = await DisputesModel.findById(request.params.id)
 
-        console.log(disputeDoc);
-
         response.status(200).render("dispute-detail", {
             user: request.user,
             data: disputeDoc,

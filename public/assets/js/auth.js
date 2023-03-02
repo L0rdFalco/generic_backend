@@ -52,10 +52,9 @@ signUpBtn.addEventListener("click", async function (e) {
     })
 
 
-    console.log(res.data);
-
     if (res.data.message.includes("success")) {
         localStorage.setItem("jwt_token", res.data.token)
+        window.location.href = `/dashboard/${res.data.token}`
     }
     else {
         console.log("something went wrong in the sign up");
@@ -98,6 +97,8 @@ signInBtn.addEventListener("click", async function (e) {
 
     if (res2.message.includes("success")) {
         localStorage.setItem("jwt_token", res2.token)
+
+        window.location.href = `/dashboard/${res2.token}`
     }
     else {
         console.log("something went wrong in the login");
