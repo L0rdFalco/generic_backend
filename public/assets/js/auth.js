@@ -9,6 +9,7 @@ const signInBtn = document.getElementById('signInBtn');
 const nameEL = document.getElementById("nameInput")
 const emailEL = document.getElementById("emailInput")
 const pwEL = document.getElementById("pwInput")
+const pwConfEL = document.getElementById("pwConfInput")
 
 const emailEL1 = document.getElementById("emailInput1")
 const pwEL1 = document.getElementById("pwInput1")
@@ -23,12 +24,12 @@ signInOption.addEventListener('click', () => {
 
 signUpBtn.addEventListener("click", async function (e) {
     e.preventDefault()
-    console.log("signup!");
     const nameVal = nameEL.value.trim()
     const emailVal = emailEL.value.trim()
     const pwVal = pwEL.value.trim()
+    const pwConfVal = pwConfEL.value.trim()
 
-    if (!nameVal || !emailVal || !pwVal) {
+    if (!nameVal || !emailVal || !pwVal || !pwConfVal) {
         errorEl.style.opacity = 1
 
         setTimeout(() => {
@@ -39,14 +40,14 @@ signUpBtn.addEventListener("click", async function (e) {
         return
     }
 
-
     const res = await axios({
         method: "POST",
         url: "/users/signup",
         data: {
             name: nameVal,
             email: emailVal,
-            password: pwVal
+            password: pwVal,
+            passwordConfirm: pwConfVal
         }
     })
 
@@ -58,7 +59,6 @@ signUpBtn.addEventListener("click", async function (e) {
 
 signInBtn.addEventListener("click", async function (e) {
     e.preventDefault()
-    console.log("login!");
 
     const emailVal1 = emailEL1.value.trim()
     const pwVal1 = pwEL1.value.trim()

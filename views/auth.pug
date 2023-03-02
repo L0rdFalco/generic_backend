@@ -5,7 +5,7 @@ html(lang='en')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     link(rel='stylesheet', href='/assets/css/auth.css')
-    title authentication
+    //- title authentication
   body
     h3#error ALL FIELDS ARE REQUIRED
     #container.container
@@ -23,6 +23,7 @@ html(lang='en')
           input#nameInput(type='text', placeholder='Name' required)
           input#emailInput(type='email', placeholder='Email' required)
           input#pwInput(type='password', placeholder='Password' required)
+          input#pwConfInput(type='password', placeholder='Repeat Password' required)
           button#signUpBtn Sign Up
       .form-container.sign-in-container
         form

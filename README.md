@@ -1,1 +1,1 @@
-# generic_backend
+backend that contains a dashboard for purchasing and keeping track of subscriptions
